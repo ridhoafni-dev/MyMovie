@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct MovieItemView: View {
+    var movie: Movie
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            AsyncImage(url: movie.posterPath) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                ProgressView()
+            }.frame(width: 80, height: 80)
+            
+            Text(movie.title)
+                .font(.system(size: 20))
+        }.padding([.top, .leading, .trailing])
     }
 }
 
 #Preview {
-    MovieItemView()
+    MovieItemView(
+        movie: movies[0]
+    )
 }
